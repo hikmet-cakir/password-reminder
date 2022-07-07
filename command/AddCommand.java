@@ -1,8 +1,20 @@
 package command;
 
-public class AddCommand extends Command {
+import entity.Record;
+
+import operation.SaveOperation;
+
+import util.Interaction;
+
+public class AddCommand implements Command {
     @Override
     public void execute() {
-        System.out.println("Add Command");
+        String location = Interaction.takeInformationByGivenValue("Location (PayPal, Amazon, Apple)");
+        String accountId = Interaction.takeInformationByGivenValue("Account ID");
+        String password = Interaction.takeInformationByGivenValue("Password");
+
+        SaveOperation saveOperation = new SaveOperation();
+        Record record = new Record(accountId, password, location);
+        saveOperation.saveRecord(record);
     }
 }
