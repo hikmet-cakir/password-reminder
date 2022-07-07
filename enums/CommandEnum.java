@@ -5,9 +5,9 @@ import java.util.Optional;
 import static java.util.Arrays.stream;
 
 public enum CommandEnum {
-    ADD_COMMAND(1),
-    DELETE_COMMAND(2),
-    SHOW_COMMAND(3);
+    ADD_COMMAND(0),
+    DELETE_COMMAND(1),
+    SHOW_COMMAND(2);
 
     private Integer id;
 
@@ -20,8 +20,8 @@ public enum CommandEnum {
     }
 
     public static CommandEnum fromId(Integer id) {
-        OptionalCommandEnum command = stream(CommandEnum.values())
-                .filter(commandEnum - commandEnum.getId().equals(id))
+        Optional<CommandEnum> command = stream(CommandEnum.values())
+                .filter(commandEnum -> commandEnum.getId().equals(id))
                 .findAny();
         return command.orElse(null);
     }

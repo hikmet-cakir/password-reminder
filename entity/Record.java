@@ -1,7 +1,7 @@
 package entity;
 
 public class Record {
-    private Integer id;
+    private String id;
     private String location;
     private String accountId;
     private String password;
@@ -15,18 +15,18 @@ public class Record {
         this.password = password;
     }
 
-    public Record(Integer id, String location, String accountId, String password) {
+    public Record(String id, String location, String accountId, String password) {
         this.id = id;
         this.location = location;
         this.accountId = accountId;
         this.password = password;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -52,5 +52,15 @@ public class Record {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "id='" + id + '\'' +
+                ", location='" + location + '\'' +
+                ", accountId='" + accountId + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
