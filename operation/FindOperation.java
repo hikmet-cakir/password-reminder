@@ -1,18 +1,30 @@
 package operation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import entity.Record;
+
 import util.FileUtil;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class FindOperation {
 
     public List<Record> findAllRecords() {
         List<String> allRawRecords = FileUtil.readAllRawRecords();
-        Record mockRecordOne = new Record(UUID.randomUUID().toString(), "PayPal","elizabeth.jackson@hotmail.com", "8432Ohio123");
-        Record mockRecordTwo = new Record(UUID.randomUUID().toString(), "GitHub","elizabeth-jackson", "32123412");
-        Record mockRecordThree = new Record(UUID.randomUUID().toString(), "Amazon", "elizabethjacksonbavaria@outlook.com", "bavaria123");
-        return List.of(mockRecordOne, mockRecordTwo, mockRecordThree);
+        return allRawRecords.stream()
+                .map(this::rawRecordToRecord)
+                .collect(Collectors.toList());
+    }
+
+    private Record rawRecordToRecord(String rawRecord) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(rawRecord, Record.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

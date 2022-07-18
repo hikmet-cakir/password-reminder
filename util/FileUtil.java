@@ -1,21 +1,49 @@
 package util;
 
-import entity.Record;
+import java.io.*;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import java.util.List;
-import java.util.UUID;
 
 public class FileUtil {
-    public static void writeToFile(Record record) {
-        System.out.println("It was written to file!");
+
+    private static final String FILE_PATH = "C:\\Users\\hikme\\Desktop\\My Projects\\passwords.txt";
+
+    public static void writeToFile(String rawRecord) {
+        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH), StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            writer.append(rawRecord);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("It was written to file!");
+        }
     }
 
     public static void deleteFromFileById(String id) {
-        System.out.println("It was deleted!");
+        try {
+            Path path = Path.of(FILE_PATH);
+            List<String> rawRecords = Files.readAllLines(path);
+            List<String> updatedRawRecords = rawRecords.stream()
+                    .filter(rawRecord -> !rawRecord.contains(id))
+                    .toList();
+            Files.deleteIfExists(path);
+            Files.createFile(path);
+            updatedRawRecords.forEach(FileUtil::writeToFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static List<String> readAllRawRecords() {
-        System.out.println("All records were read");
-        return null;
+        try {
+            return Files.readAllLines(Paths.get(FILE_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

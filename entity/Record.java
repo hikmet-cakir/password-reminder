@@ -1,14 +1,18 @@
 package entity;
 
-public class Record {
-    private String id;
-    private String location;
-    private String accountId;
-    private String password;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class Record {
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("location")
+    private String location;
+    @JsonProperty("account_id")
+    private String accountId;
+    @JsonProperty("password")
+    private String password;
     public Record() {
     }
-
     public Record(String location, String accountId, String password) {
         this.location = location;
         this.accountId = accountId;
@@ -57,10 +61,10 @@ public class Record {
     @Override
     public String toString() {
         return "Record{" +
-                "id='" + id + '\'' +
-                ", location='" + location + '\'' +
-                ", accountId='" + accountId + '\'' +
-                ", password='" + password + '\'' +
+                "id:'" + id + '\'' +
+                ", location:'" + location + '\'' +
+                ", accountId:'" + accountId + '\'' +
+                ", password:'" + password + '\'' +
                 '}';
     }
 }
