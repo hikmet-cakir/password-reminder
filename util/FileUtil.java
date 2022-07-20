@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FileUtil {
@@ -41,7 +43,11 @@ public class FileUtil {
 
     public static List<String> readAllRawRecords() {
         try {
-            return Files.readAllLines(Paths.get(FILE_PATH));
+            Path path = Path.of(FILE_PATH);
+            if(!Files.exists(path)) {
+                return new ArrayList<>();
+            }
+            return Files.readAllLines(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

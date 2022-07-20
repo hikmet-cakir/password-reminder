@@ -30,4 +30,30 @@ public class Interaction {
             throw new RuntimeException("Please give valid " + value + "!");
         }
     }
+
+    public static void clearScreen() {
+        for (int i = 0; i < 50; ++i) System.out.println();
+    }
+
+    public static String takeContinueRequest() {
+        System.out.print("Do you want to do another thing?(Yes(y)/No(n):");
+        try {
+            return reader.readLine();
+        } catch (Exception e) {
+            throw new RuntimeException("Please give valid value!");
+        }
+    }
+
+    public static String[] takeCredentialInformations() {
+        try {
+            System.out.print("Username:");
+            String username = reader.readLine();
+
+            System.out.print("Password:");
+            String password = reader.readLine();
+            return new String[] {username, password};
+        } catch (Exception e) {
+            throw new RuntimeException("Please give valid value!");
+        }
+    }
 }

@@ -4,7 +4,9 @@ import entity.Record;
 
 import operation.SaveOperation;
 
+import security.InformationHiding;
 import util.Interaction;
+
 
 public class AddCommand implements Command {
     @Override
@@ -14,7 +16,8 @@ public class AddCommand implements Command {
         String password = Interaction.takeInformationByGivenValue("Password");
 
         SaveOperation saveOperation = new SaveOperation();
-        Record record = new Record(accountId, password, location);
+        Record record = new Record(location, accountId, password);
         saveOperation.saveRecord(record);
+        Interaction.clearScreen();
     }
 }

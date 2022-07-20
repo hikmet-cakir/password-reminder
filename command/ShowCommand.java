@@ -11,8 +11,8 @@ public class ShowCommand implements Command {
     public void execute() {
         FindOperation findOperation = new FindOperation();
         List<Record> allRecords = findOperation.findAllRecords();
-        System.out.format("%15s %40s %35s %40s%n", "ID", "LOCATION", "ACCOUNT ID", "PASSWORD");
+        System.out.format("%20s %35s %30s %30s \n", "ID", "LOCATION", "ACCOUNT ID", "PASSWORD");
         allRecords.forEach(record ->
-                System.out.format("%s %15s %50s %30s%n", record.getId(), record.getLocation(), record.getAccountId(), record.getPassword()));
+                System.out.printf("%s %17s %45s %18s \n", record.getId(), record.getLocation(), record.getAccountId(), record.getPassword()));
     }
 }

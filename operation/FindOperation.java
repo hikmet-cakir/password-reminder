@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entity.Record;
 
+import security.InformationHiding;
 import util.FileUtil;
 
 import java.util.List;
@@ -14,9 +15,17 @@ public class FindOperation {
 
     public List<Record> findAllRecords() {
         List<String> allRawRecords = FileUtil.readAllRawRecords();
-        return allRawRecords.stream()
+        List<Record> allRecords = allRawRecords.stream()
                 .map(this::rawRecordToRecord)
                 .collect(Collectors.toList());
+        allRecords.forEach(this::exposeHiddenRecordInformations);
+        return allRecords;
+    }
+
+    private void exposeHiddenRecordInformations(Record record) {
+        record.setPassword(InformationHiding.decrypt(record.getPassword()));
+        record.setAccountId(InformationHiding.decrypt(record.getAccountId()));
+        record.setLocation(InformationHiding.decrypt(record.getLocation()));
     }
 
     private Record rawRecordToRecord(String rawRecord) {
