@@ -17,7 +17,7 @@ public class InformationHiding {
 
     private static SecretKey key;
 
-    private static String encryptionKey = "DEFAULT_KEY";
+    private static String encryptionKey = "0123456789012345678912345678912";
 
     private static void setTrippleDesConfiguration() {
         try {

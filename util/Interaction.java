@@ -59,6 +59,7 @@ public class Interaction {
 
     public static String takeSecretKeyInformation() {
         try {
+            System.out.println("Note: if you don't want to use key, press enter.");
             System.out.print("Please give your secret key information:");
             return reader.readLine();
         } catch (Exception e) {

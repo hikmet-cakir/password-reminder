@@ -14,12 +14,16 @@ public class Main {
         Help.printBanner();
 
         String secretKeyInformation = Interaction.takeSecretKeyInformation();
-        InformationHiding.setEncryptionKey(secretKeyInformation);
+        if(!secretKeyInformation.isBlank()) {
+            InformationHiding.setEncryptionKey(secretKeyInformation);
+        }
+        Interaction.clearScreen();
 
         Agent agent = new Agent();
         while(true) {
             Help.printMenu();
             Integer selectedOption = Interaction.takeOption();
+            Interaction.clearScreen();
             CommandEnum selectedCommand = CommandEnum.fromId(selectedOption);
             Command command = CommandFactory.getCommand(selectedCommand);
             agent.setCommand(command);

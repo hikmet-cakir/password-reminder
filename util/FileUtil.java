@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FileUtil {
 
-    private static final String FILE_PATH = "C:\\Users\\hikme\\Desktop\\My Projects\\passwords.txt";
+    private static final String FILE_PATH = ".\\passwords.txt";
 
     public static void writeToFile(String rawRecord) {
         try(BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH), StandardCharsets.UTF_8,
