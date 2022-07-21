@@ -3,7 +3,7 @@ import command.CommandFactory;
 
 import enums.CommandEnum;
 
-import security.Authentication;
+import security.InformationHiding;
 import util.Help;
 import util.Interaction;
 
@@ -13,11 +13,9 @@ public class Main {
     public static void main(String[] args) {
         Help.printBanner();
 
-        String[] credentialInformations = Interaction.takeCredentialInformations();
-        boolean hasAccess = Authentication.hasAccess(credentialInformations);
-        if(!hasAccess) {
-            return;
-        }
+        String secretKeyInformation = Interaction.takeSecretKeyInformation();
+        InformationHiding.setEncryptionKey(secretKeyInformation);
+
         Agent agent = new Agent();
         while(true) {
             Help.printMenu();

@@ -56,4 +56,13 @@ public class Interaction {
             throw new RuntimeException("Please give valid value!");
         }
     }
+
+    public static String takeSecretKeyInformation() {
+        try {
+            System.out.print("Please give your secret key information:");
+            return reader.readLine();
+        } catch (Exception e) {
+            throw new RuntimeException("Please give valid value!");
+        }
+    }
 }

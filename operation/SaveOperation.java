@@ -27,8 +27,8 @@ public class SaveOperation {
     }
 
     private void hideRecordInformations(Record record) {
-       record.setPassword(InformationHiding.encrypt(record.getPassword()));
-       record.setAccountId(InformationHiding.encrypt(record.getAccountId()));
-       record.setLocation(InformationHiding.encrypt(record.getLocation()));
+        record.setPassword(InformationHiding.encrypt(record.getPassword()));
+        record.setAccountId(InformationHiding.encrypt(record.getAccountId()));
+        record.setLocation(InformationHiding.encrypt(record.getLocation()));
     }
 }

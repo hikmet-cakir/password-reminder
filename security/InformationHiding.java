@@ -17,11 +17,11 @@ public class InformationHiding {
 
     private static SecretKey key;
 
-    private static final String ENCRYPTION_KEY = "BE_QUIET_THIS_IS_OUR_SECRET";
+    private static String encryptionKey = "DEFAULT_KEY";
 
     private static void setTrippleDesConfiguration() {
         try {
-            byte[] arrayBytes = ENCRYPTION_KEY.getBytes(UNICODE_FORMAT);
+            byte[] arrayBytes = encryptionKey.getBytes(UNICODE_FORMAT);
             KeySpec keySpec = new DESedeKeySpec(arrayBytes);
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(DESEDE_ENCRYPTION_SCHEME);
             cipher = Cipher.getInstance(DESEDE_ENCRYPTION_SCHEME);
@@ -53,5 +53,9 @@ public class InformationHiding {
         } catch (Exception e) {
             throw new RuntimeException("Decrypt operation was failed!");
         }
+    }
+
+    public static void setEncryptionKey(String encryptionKey) {
+        InformationHiding.encryptionKey = encryptionKey;
     }
 }
